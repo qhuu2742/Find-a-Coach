@@ -46,6 +46,7 @@ export default {
     filteredCoaches() {
       const coaches = this.$store.getters['coaches/coaches'];
       return coaches.filter(coach => {
+        // includes() sẽ trả về true nếu mảng chứa một phần tử chỉ định
         if (this.activeFilters.frontend && coach.areas.includes('frontend')) {
           return true;
         }
