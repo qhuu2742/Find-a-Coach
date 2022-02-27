@@ -38,11 +38,12 @@ export default {
       // spread operator dùng để sao chép mảng filters sau đó ghi đè mảng này
       const updatedFilters = {
         ...this.filters,
-        // ghi đè đây
         [inputId]: isActive,
       };
+      console.log('đây là []: ', inputId, ': ', isActive);
+      console.log('updatedFilters: ',updatedFilters);
       this.filters = updatedFilters;
-      // truyền methods này lên component cha và truyền updatedFilters vào
+      // truyền dữ liệu này lên component cha
       this.$emit('change-filter', updatedFilters);
     },
   },
