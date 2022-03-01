@@ -6,7 +6,7 @@
     <base-card>
       <div class="controls">
         <base-button mode="outline">Refresh</base-button>
-        <base-button link to="/register">Register as a Coach</base-button>
+        <base-button v-if="!isCoach" link to="/register">Register as a Coach</base-button>
       </div>
       <ul v-if="hasCoaches">
         <coach-item
@@ -43,12 +43,15 @@ export default {
     };
   },
   computed: {
+    isCoach() {
+      return this.$store.getters['coaches/isCoach'];
+    },
     filteredCoaches() {
       // tất cả HLV
       const coaches = this.$store.getters['coaches/coaches'];
       // ý tưởng: ban đầu getters hết các HLV để hiển thị, giờ muốn dùng bộ lọc thì ta dùng
       // hàm filter để lọc những HLV cần hiển thị
-      return coaches.filter(coach => {
+      return coaches.filter((coach) => {
         // includes() sẽ trả về true nếu mảng chứa một phần tử chỉ định
         if (this.activeFilters.frontend && coach.areas.includes('frontend')) {
           return true;
@@ -61,7 +64,6 @@ export default {
         }
         return false;
       });
-      
     },
     hasCoaches() {
       return this.$store.getters['coaches/hasCoaches'];
