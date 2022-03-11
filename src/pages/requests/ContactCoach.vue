@@ -1,14 +1,14 @@
 <template>
   <form @submit.prevent="submitForm">
-    <div class="form-control" :class="{ errors: !formIsValid }">
+    <div class="form-control">
       <label for="email">Ur Email</label>
       <input type="email" id="email" v-model.trim="email" />
     </div>
-    <div class="form-control" :class="{ errors: !formIsValid }">
+    <div class="form-control">
       <label for="message">Message</label>
       <textarea rows="5" id="message" v-model.trim="message"></textarea>
     </div>
-    <p v-if="!formIsValid">Có gì đó sai ở đây!</p>
+    <p class="errors" v-if="!formIsValid">Có gì đó sai ở đây!</p>
     <div class="actions">
       <base-button>Send Message</base-button>
     </div>
@@ -24,7 +24,7 @@ export default {
       formIsValid: true,
     };
   },
-  method: {
+  methods: {
     submitForm() {
       this.formIsValid = true;
       if (
@@ -35,6 +35,12 @@ export default {
         this.formIsValid = false;
         return;
       }
+      this.$store.dispatch('requests/contactCoach', {
+        email: this.email,
+        message: this.message,
+        coachId: this.$route.id
+      });
+      this.$router.replace('/coaches');
     },
   },
 };
