@@ -51,5 +51,5 @@ export default {
             coaches.push(coach)
         }
         context.commit('setCoaches', coaches)
-    }
+    },
 };
