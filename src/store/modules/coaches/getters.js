@@ -12,5 +12,13 @@ export default {
         const userId = rootGetters.userId;
         // hàm some sẽ duyệt tất các phần tử trong mảng xem có phần tử nào phù hợp với điều kiện k, có thì trả về true
         return coaches.some(coach => coach.id === userId);
+    },
+    shouldUpdate(state) {
+        const lastFetch = state.lastFetch;
+        if (!lastFetch) {
+            return true;
+        }
+        const currentTimeStamp = new Date().getTime();
+        return (currentTimeStamp - lastFetch) / 1000 > 60;
     }
 }
