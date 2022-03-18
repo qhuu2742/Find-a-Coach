@@ -21,7 +21,11 @@ export default {
 
         context.commit('addRequest', newRequest);
     },
-    async fetchRequests(context) {
+    async fetchRequests(context, payload) {
+        if (!payload.forceRefresh && !context.getters.shouldUpdate) {
+            return;
+        }
+
         const coachId = context.rootGetters.userId;
         const response = await fetch(`https://vue3-ac313-default-rtdb.firebaseio.com/requests/${coachId}.json`);
         const responseData = await response.json();
@@ -43,5 +47,6 @@ export default {
             requests.push(request);
         }
         context.commit('setRequests', requests);
+        context.commit('setFetchTimestamp')
     }
 }

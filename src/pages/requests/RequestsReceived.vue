@@ -47,10 +47,12 @@ export default {
     this.loadRequests();
   },
   methods: {
-    async loadRequests() {
+    async loadRequests(refresh = false) {
       this.isLoading = true;
       try {
-        await this.$store.dispatch('requests/fetchRequests');
+        await this.$store.dispatch('requests/fetchRequests', {
+          forceRefresh: refresh,
+        });
       } catch (error) {
         this.error = error.message || 'Có gì đấy đang trục trặc!';
       }
