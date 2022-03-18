@@ -1,24 +1,26 @@
 <template>
-  <base-dialog :show="!!error" title="Có lỗi" @close="handleError">
-    <p>{{ error }}</p>
-  </base-dialog>
-  <section>
-    <base-card>
-      <header>
-        <h2>Nơi nhận tin nhắn!</h2>
-      </header>
-      <base-spinner v-if="isLoading"></base-spinner>
-      <ul v-else-if="hasRequests && !isLoading">
-        <request-item
-          v-for="req in receivedRequests"
-          :key="req.id"
-          :email="req.userEmail"
-          :message="req.message"
-        ></request-item>
-      </ul>
-      <h3 v-else>Bạn không có tin nhắn nào!</h3>
-    </base-card>
-  </section>
+  <div>
+    <base-dialog :show="!!error" title="Có lỗi" @close="handleError">
+      <p>{{ error }}</p>
+    </base-dialog>
+    <section>
+      <base-card>
+        <header>
+          <h2>Nơi nhận tin nhắn!</h2>
+        </header>
+        <base-spinner v-if="isLoading"></base-spinner>
+        <ul v-else-if="hasRequests && !isLoading">
+          <request-item
+            v-for="req in receivedRequests"
+            :key="req.id"
+            :email="req.userEmail"
+            :message="req.message"
+          ></request-item>
+        </ul>
+        <h3 v-else>Bạn không có tin nhắn nào!</h3>
+      </base-card>
+    </section>
+  </div>
 </template>
 
 <script>
