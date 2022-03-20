@@ -13,7 +13,7 @@
         Vui lòng không để trống, password phải trên 6 ký tự!
       </p>
       <base-button>{{ submitButtonCaption }}</base-button>
-      <!-- set type button để nó không submit form -->
+      <!-- set type button để nó không submit form. -->
       <base-button type="button" mode="flat" @click="switchAuthMode">
         {{ switchModeButtonCaption }}
       </base-button>
