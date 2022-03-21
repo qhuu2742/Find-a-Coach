@@ -10,7 +10,11 @@ export default {
             areas: data.areas
         };
 
-        const response = await fetch(`https://vue3-ac313-default-rtdb.firebaseio.com/coaches/${userId}.json`, {
+        const token = context.rootGetters.token;
+
+        // vì chúng ta setting trong firebase phần write của coaches được bảo vệ nên ta cần token để truy cập vào phần được bảo vệ này
+        // Để truy cập thì ta thêm ?auth= vào sau json và cộng thêm chuỗi token ta lấy được từ Vuex sau khi lưu trữ.
+        const response = await fetch(`https://vue3-ac313-default-rtdb.firebaseio.com/coaches/${userId}.json?auth=` + token, {
             method: 'PUT',
             body: JSON.stringify(coachData)
         });
